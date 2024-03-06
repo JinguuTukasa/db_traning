@@ -1,0 +1,108 @@
+Q1
+require_once()は何のために記述しているか説明してください。
+↓
+require_once(読み込みたいファイル名)を記述することにより
+読み込みし、中に記載があるものが使用できるようになる
+
+Q2
+connectPdo() の返り値は何か、またこの記述は何をするための記述か説明してください。
+↓
+//PDOという定義済みのクラスをインスタンス化(忘れたら調べる)するために必要
+PDO()関数を使ってDBに接続してその結果生成されたPDOインスタンスが返り値になる
+接続をするために必要な情報などをDBに伝えて接続確認をするための記述
+
+Q3
+try catchとは何か説明してください。
+↓
+try：例外が発生する可能性があるコードを配置しておく
+事前にエラーが出たら発生した場合throwでエラーを処理することができるようになる
+エラーコードが出てくるパターンのエラー
+
+catch ：tryブロック内で発生した例外を補足しそれらの例外に対し適切な処理を行う
+        tryで例外を補足→catchで例外を処理
+        ↑のイメージ
+
+Q4
+PDOクラスをインスタンス化する際にtry catchが必要な理由を説明してください。
+↓
+データベースとの通信中に発生する可能性がある予測できる例外を適切に処理するため
+接続エラーや構文エラーやデータベースが使用できない場合など
+
+それらのエラーを事前に予測しそれに対処できるプログラムを構築しておくことでプログラムがクラッシュすることを防ぎエラーメッセージとして処理することが可能となるため
+
+要するにデータベースを使用中の安全性や信頼性を上げるために「こんなこともあろうかと」の精神で組み上げるものである
+
+Section14
+Q1
+データの受け取り・受け渡しの処理を記述するのはどのファイルでしたか？
+① functions.php     ② connection.php     ③ config.php     ④ store.php
+
+A.②
+
+Q2
+DB操作処理を記述するのはどのファイルでしたか？
+① functions.php     ② connection.php     ③ config.php     ④ store.php
+
+A.①
+
+Q3
+アプリケーションの設定を記述するのはどのファイルでしたか？
+① functions.php     ② connection.php     ③ config.php     ④ store.php
+
+A.③
+
+Q4
+以下のフォームの送信ボタンを押下した際にstore.phpの$_POSTにどんな値が格納されますか？
+
+<form action="store.php" method="post">
+  <input type="text" name="id" value="123">
+  <textarea　name="content">焼肉</textarea>
+  <button type="submit">送信</button>
+</form>
+
+A.$_POSTには連想配列が格納されている値としては
+Key id value 123
+Key content value 焼肉
+以上の二つが格納されている
+
+Q5
+header('location: ./index.html')は何をしているか説明してください。
+A.index.htmlにリダイレクトさせている
+→リダイレクトとは？
+ウェブページのURLを別のURLに自動的に転送することを指す
+
+
+Section15
+Q1
+connection.phpで定義した変数$dbhの中には何を格納したでしょうか？
+① PDO文字列     ② PDOクラス     ③ PDO配列     ④ PDOインスタンス
+
+A.PDOインスタンス
+
+Q2
+<?= $var; ?>は以下の選択肢のうち、どの処理の省略形ですか？
+① <php>$var</php>     ② <?php echo $var; ?>     ③ <?php var_dump($var) ?>     ④ <?php $var; ?>
+
+A. <?php echo $var; ?> 
+
+Q3
+一覧ページにTODOを表示するために今回行ったこととして間違っている選択肢はどれですか？
+① 一覧取得の関数が使えるように、index.phpでrequire_onceを使ってfunctions.phpを読み込んだ。
+② indexページでPHPが使えるようにファイルの拡張子を変更した。
+③ SELECT文でDBからデータを取得した。
+④ echoはPHPとHTMLが混在しているときは使えないので短縮表現を使った。
+
+A.④ echoはPHPとHTMLが混在しているときは使えないので短縮表現を使った。
+→別に使えないわけではないけどわかりやすくするために短縮表現を使用した
+
+Q4
+queryメソッドの返り値のデータ型は以下の選択肢のうちどれでしょうか？
+① PDOインスタンス     ② 連想配列     ③ PDOStatementインスタンス     ④ 文字列
+
+A.③ PDOStatementインスタンス
+
+Q5
+getTodoList()の返り値について説明してください。
+A.返り値はデータベースから取得された連想配列のレコードです
+→具体的にはgetAllRecords()で取得したレコードを
+ fetchAll()で連想配列で返される

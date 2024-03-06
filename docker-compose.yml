@@ -1,0 +1,23 @@
+version: "3.5"
+services:
+  php-apache:
+    build:
+      context: ./php-apache
+      dockerfile: Dockerfile
+    ports:
+      - 8888:80 # localhost:8888 → php-apache:80 /var/www/app/public
+    volumes:
+      - type: bind
+        source: "./php-apache/000-default.conf"
+        target: "/etc/apache2/sites-enabled/000-default.conf"
+      - type: bind
+        source: "./php-apache/app"
+        target: "/var/www/app"
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=php_lesson
