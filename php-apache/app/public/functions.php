@@ -27,7 +27,7 @@ function savePostedData($post)
 
 function getRefererPath()
 {
-    $urlArray = parse_url($_SERVER['HTTP_REFERER']); //調べる
+    $urlArray = parse_url($_SERVER['HTTP_REFERER']); //調べる 14:00
     return $urlArray['path'];
 }
 
