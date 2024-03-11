@@ -13,9 +13,6 @@
     <?php if (!empty($_SESSION['err'])): ?>
       <p><?= $_SESSION['err']; ?></p>
     <?php endif; ?>
-    <?php
-      var_dump($_SESSION['token']);
-    ?>
     <form action="store.php" method="post">
       <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
       <input type="text" name="content">

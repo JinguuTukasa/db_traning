@@ -48,19 +48,29 @@ function redirectToPostedPage()
 function savePostedData($post)
 {
     checkToken($post['token']);
+    validate($post); 
     $path = getRefererPath();
     switch ($path) {
-        case '/new.php'://新規作成
+        case '/new.php':
             createTodoData($post['content']);
             break;
-        case '/edit.php'://編集
+        case '/edit.php':
             updateTodoData($post);
             break;
-        case '/index.php'://論理削除
+        case '/index.php':
             deleteTodoData($post['id']);
             break;
         default:
             break;
+    }
+}
+
+
+function validate($post)
+{
+    if (isset($post['content']) && $post['content'] === '') {
+        $_SESSION['err'] = '入力がありません';
+        redirectToPostedPage();
     }
 }
 

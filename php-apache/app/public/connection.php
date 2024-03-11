@@ -22,8 +22,10 @@ function connectPdo() {         //Q2
 function createTodoData($todoText)
 {
     $dbh = connectPdo();
-    $sql = 'INSERT INTO todos (content) VALUES ("' . $todoText . '")';
-    $dbh->query($sql);
+    $sql = 'INSERT INTO todos (content) VALUES (:todoText)';
+    $stmt = $dbh->prepare($sql);
+    $stmt->bindValue(':todoText', $todoText, PDO::PARAM_STR);
+    $stmt->execute();
 }
 
 //データ取得処理
@@ -41,8 +43,11 @@ function getAllRecords()
 function updateTodoData($post)
 {
     $dbh = connectPdo();
-    $sql = 'UPDATE todos SET content = "' . $post['content'] . '" WHERE id = ' . $post['id'];
-    $dbh->query($sql);
+    $sql = 'UPDATE todos SET content = :todoText WHERE id = :id';
+    $stmt = $dbh->prepare($sql);
+    $stmt->bindValue(':todoText', $post['content'], PDO::PARAM_STR);
+    $stmt->bindValue(':id', (int) $post['id'], PDO::PARAM_INT);
+    $stmt->execute();
 }
 
 
@@ -51,17 +56,14 @@ function getTodoTextById($id)
 {
     $dbh = connectPdo();
 
-    // SQL文を準備し、$idをダブルクォーテーションで囲む
-    $sql = "SELECT content FROM todos WHERE id = $id AND deleted_at IS NULL";
+    $sql = "SELECT content FROM todos WHERE id = :todoId AND deleted_at IS NULL";
 
-    // SQL文を実行し、結果セットを取得
-    $result = $dbh->query($sql);
+    $stmt = $dbh->prepare($sql);//追記
+    $stmt->bindValue('todoId',$id,PDO::PARAM_INT);
+    $stmt->execute();
 
-    // 結果セットからデータを取得し、連想配列として格納
-    //PDO::FETCH_ASSOCここの記述必要なのかは不明
-    $data = $result->fetch(PDO::FETCH_ASSOC);
+    $data = $stmt->execute();
     
-    // contentを返す
     return $data['content'];
 }
 
@@ -70,11 +72,16 @@ function deleteTodoData($id)
 {
     $dbh = connectPdo();
     $now = date('Y-m-d H:i:s');
+    $sql = "UPDATE todos SET deleted_at = :todoNow WHERE id = :todoId";
 
-    //UPDATE処理で論理削除を上書きして表示されないようにするだけ
-    $sql = "UPDATE todos SET deleted_at = '$now' WHERE id = $id";
+    $stmt = $dbh->prepare($sql);
 
-    $dbh->query($sql);
+    // プレースホルダーに値をバインド
+    $stmt->bindValue(':todoNow', $now, PDO::PARAM_STR);
+    $stmt->bindValue(':todoId', $id, PDO::PARAM_INT);
+
+    // 準備された文を実行
+    $stmt->execute();
 }
 
 

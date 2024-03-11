@@ -11,9 +11,6 @@ setToken();
     <title>Home</title>
   </head>
   <body>
-    <?php
-      var_dump($_SESSION['token']);
-    ?>
     <?php if (!empty($_SESSION['err'])): ?>
       <p><?= $_SESSION['err']; ?></p>
     <?php endif; ?>
