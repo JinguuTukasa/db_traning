@@ -1,7 +1,6 @@
 <?php
-require_once('functions.php');
-$todo = getSelectedTodo($_GET['id']);
-setToken();
+  require_once('functions.php');
+  setToken();
 ?>
 
 <!DOCTYPE html>
@@ -11,9 +10,9 @@ setToken();
   <title>編集</title>
 </head>
 <body>
-  <?php if (!empty($_SESSION['err'])): ?>   
-  <p><?= $_SESSION['err']; ?></p>
-  <?php endif; ?>
+  <!-- <?php if (!empty($_SESSION['err'])): ?>   
+    <p><?= $_SESSION['err']; ?></p>
+  <?php endif; ?> -->
   <form action="store.php" method="post">
     <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
     <input type="hidden" name="id" value="<?= e($_GET['id']); ?>">
