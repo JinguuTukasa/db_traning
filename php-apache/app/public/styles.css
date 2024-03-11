@@ -1,0 +1,32 @@
+body {
+  background: linear-gradient(to right, #248cf3, #12d795);
+}
+
+h1 {
+  color: blue;
+  text-align: center;
+  -webkit-text-stroke: 1px black;
+   color: white;
+   text-shadow:
+       3px 3px 0 #000,
+     -1px -1px 0 #000,  
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+       1px 1px 0 #000;
+}
+
+.new {
+  text-align: center;
+  font-size: 50px;
+  color: white;
+	-webkit-text-stroke: 1px #F8F8F8;
+	text-shadow: 0px 1px 4px #23430C;
+}
+
+.menu {
+  margin:0 auto;
+  font-size: 30px;
+	color: white;
+	-webkit-text-stroke: 1px #92929276;
+	text-shadow: 0px 1px 4px #23430C;
+}

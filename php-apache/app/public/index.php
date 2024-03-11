@@ -9,20 +9,21 @@ setToken();
   <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <?php if (!empty($_SESSION['err'])): ?>
       <p><?= $_SESSION['err']; ?></p>
     <?php endif; ?>
-    welcome hello world
+    <h1>welcome hello world</h1>
     <div>
       <a href="new.php">
         <!-- <aタグは全部Get> -->
-        <p>新規作成</p>
+        <p class = new>新規作成</p>
       </a>
     </div>
     <div> 
-      <table>
+      <table class = menu>
         <tr>
           <th>ID</th>
           <th>内容</th>
